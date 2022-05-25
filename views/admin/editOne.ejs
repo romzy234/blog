@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Blog </title>
+
+    <% if(logUser.setting.theme == "white"){%>
+        <link rel="stylesheet" href="/users/assets/css/bootstrap.css">
+        <link rel="stylesheet" href="/users/assets/css/app.css">
+        <%}else{%> 
+        <link rel="stylesheet" href="/users/assets/css/dark.css">
+        <link rel="stylesheet" href="/users/assets/css/darkBoot.css">
+        <%}%>
+
+    <link rel="stylesheet" href="/users/assets/vendors/quill/quill.snow.css">
+        <!-- Include Choices CSS -->
+        <link rel="stylesheet" href="/users/assets/vendors/choices.js/choices.min.css" />
+
+    <link rel="stylesheet" href="/users/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="shortcut icon" href="/users/assets/images/favicon.svg" type="image/x-icon">
+    <script>
+        var x= <%- data.body %>;
+       </script>
+       <style>
+           .switch{position:relative;display:inline-block;width:60px;height:34px}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:rgb(245, 94, 94);-webkit-transition:.4s;transition:.4s}.slider:before{position:absolute;content:"";height:26px;width:26px;left:4px;bottom:4px;background-color:#fff;-webkit-transition:.4s;transition:.4s}input:checked+.slider{background-color:#2196f3}input:focus+.slider{box-shadow:0 0 1px rgb(183, 66, 66)}input:checked+.slider:before{-webkit-transform:translateX(26px);-ms-transform:translateX(26px);transform:translateX(26px)}.slider.round{border-radius:34px}.slider.round:before{border-radius:50%}
+       </style>
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Edit Blog</h3>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/users">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Edit Blog</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title" style="text-align: center;">Editor</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-primary">
+                                <h4 class="alert-heading">What you See is What you get (WYSIWYG) Editor</h4>
+                              </div>
+                            <p>Style the Blog content in the text Editor  </p>
+                           <form action="/users/editOne/<%= data._id%>" enctype="multipart/form-data" method="post">
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label for="title-column">Title</label>
+                                    <input type="text" id="title-column" name="title" class="form-control" placeholder="Title" value="<%= data.title%>" required="">
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div class="col-lg-6 col-md-12">
+                                <p>Upload Cover Image</p>
+                                <div class="form-file">
+                                    <input type="file" class="form-file-input" id="customFile" name="image">
+                                    <label class="form-file-label" for="customFile">
+                                        <span class="form-file-text">Choose file...</span>
+                                        <span class="form-file-button">Browse</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <div >
+                                <h4>To Categorize Blogs Use Tags  <b style="color: red;">REQUIRED</b></h4>
+                                <p style="color: darkred;">ReSelete All The Tags As There Were Reset</p><p>Manage Tags go <a href="/users/tags"> HERE</a>.</p>
+                                <div class="form-group">
+                                    <select class="choices form-select multiple-remove"
+                                        multiple="multiple" id="example2" required="">
+                                    <%tag.forEach((value)=>{%>
+                                        <option value="<%= value.tag.toUpperCase()%>"><%= value.tag.toUpperCase()%></option>    
+                                    <%});%> 
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-md-12 col-12">
+                                <div class="form-group with-title mb-3">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="preview" rows="4" required=""> <%= data.preview%></textarea>
+                                    <label>About Blog Or Preview Text -> <span style="font-weight: bolder; color: darkcyan;"> This Is For Google Search Remember To Add The Keyword Here</span></label>
+                                </div>
+                            </div>
+                            <br>
+                            <input name="body" type="hidden">
+                            <input name="tag" type="hidden">
+                            <div id="editor" style="height: 500px">
+                            </div>
+                            <br>
+                            <input type="text" name="authourID"  value="<%=data.authour%>" hidden = "">
+                            <input type="hidden" name="id" value="<%=data._id%>">
+                            <input type="hidden" name="logo" value="<%=data.image%>">
+                            <% if(data.publish == 'Published'){%>
+                            <div class="col-12 d-flex justify-content-start">
+                                <span style="font-weight: bolder;color: rgb(245, 94, 94); padding: auto; padding-top: 8px;padding-left: 6px; padding-right: 6px;" >Draft</span> <span>
+                                <label class="switch">
+                                    <input type="checkbox" name="publish" checked>
+                                    <span class="slider round"></span>
+                                  </label></span>
+                                  <span style="font-weight: bolder;color: #2196f3; padding: auto; padding-top: 8px;padding-right: 6px; padding-left: 6px;" >Publish</span>
+                            </div>
+                             <%}else{%> 
+                                <div class="col-12 d-flex justify-content-start">
+                                    <span style="font-weight: bolder;color: rgb(245, 94, 94); padding: auto; padding-top: 8px;padding-left: 6px; padding-right: 6px;" >Draft</span> 
+                                    <label class="switch">
+                                        <input type="checkbox" name="publish">
+                                        <span class="slider round"></span>
+                                      </label></span>
+                                    <span style="font-weight: bolder;color: #2196f3; padding: auto; padding-top: 8px;padding-right: 6px; padding-left: 6px;" >Publish</span><span>
+                                </div>
+                                  <%}%>
+
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success me-1 mb-1" style="font-weight: bolder;">Update Changes</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="/users/assets/vendors/quill/quill.min.js"></script>
+    <script src="/users/assets/vendors/choices.js/choices.min.js"></script>
+    <script src="/users/assets/js/feather-icons/feather.min.js"></script>
+    <script src="/users/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/users/assets/js/app.js"></script>
+    <script src="/users/assets/js/pages/form-editor2.js"></script>
+        <!-- Include Choices JavaScript -->
+    <script src="/users/assets/js/main.js"></script>
+
+    <script>
+
+    </script>
+</body>
+
+</html>

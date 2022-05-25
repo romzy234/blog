@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Layout</title>
+
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="/users/assets/vendors/choices.js/choices.min.css" />
+
+    <% if(logUser.setting.theme == "white"){%>
+    <link rel="stylesheet" href="/users/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/users/assets/css/app.css">
+    <%}else{%> 
+    <link rel="stylesheet" href="/users/assets/css/dark.css">
+    <link rel="stylesheet" href="/users/assets/css/darkBoot.css">
+    <%}%>
+    <link rel="stylesheet" href="/users/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="shortcut icon" href="/users/assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-4 order-md-1 order-last">
+                            <h3>Settings - Customize Blog Layout</h3>
+                            <p class="text-subtitle text-muted">Would finish Everything in Version Two.</p>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/users">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Customise Layout</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+        <form action="/users/custom" enctype="multipart/form-data" method="post">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Site Header</h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(custom.siteHeader == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked value=true name="siteHeader"
+                                            id="siteHeader1">
+                                        <label class="form-check-label" for="siteHeader1" >
+                                            Show Site Header
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="siteHeader"
+                                            id="siteHeader2" value=false>
+                                        <label class="form-check-label" for="siteHeader2">
+                                           Disable Site Header
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value=true name="siteHeader"
+                                                id="siteHeader1">
+                                            <label class="form-check-label" for="siteHeader1" >
+                                                Show Site Header
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="siteHeader"
+                                                id="siteHeader2" checked value=false>
+                                            <label class="form-check-label" for="siteHeader2">
+                                               Disable Site Header
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Most Popular System</h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(custom.popularSystem == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked value=true name="popularSystem"
+                                            id="popularSystem1">
+                                        <label class="form-check-label" for="popularSystem1" >
+                                            Show Popular Bar System
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="popularSystem"
+                                            id="popularSystem2" value=false>
+                                        <label class="form-check-label" for="popularSystem2">
+                                           Disable Popular Bar System
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value=true name="popularSystem"
+                                                id="popularSystem1">
+                                            <label class="form-check-label" for="popularSystem1" >
+                                                Show Popular Bar System
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="popularSystem"
+                                                id="popularSystem2" checked value=false>
+                                            <label class="form-check-label" for="popularSystem2">
+                                               Disable Popular Bar System
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Most Popular Mobile</h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(custom.popularMobile == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked value=true name="popularMobile"
+                                            id="popularMobile1">
+                                        <label class="form-check-label" for="popularMobile1" >
+                                            Show Popular Bar Mobile
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="popularMobile"
+                                            id="popularMobile2" value=false>
+                                        <label class="form-check-label" for="popularMobile2">
+                                           Disable Popular Bar Mobile
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value=true name="popularMobile"
+                                                id="popularMobile1">
+                                            <label class="form-check-label" for="popularMobile1" >
+                                                Show Popular Bar Mobile
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="popularMobile"
+                                                id="popularMobile2" checked value=false>
+                                            <label class="form-check-label" for="popularMobile2">
+                                               Disable Popular Bar Mobile
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Most Commented <b>( MOBILE AND SYSTEMS )</b></h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(custom.comment == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked value=true name="comment"
+                                            id="comment1">
+                                        <label class="form-check-label" for="comment1" >
+                                            Show Most Commented Bar
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="comment"
+                                            id="comment2" value=false>
+                                        <label class="form-check-label" for="comment2">
+                                           Disable Most Commented Bar
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value=true name="comment"
+                                                id="comment1">
+                                            <label class="form-check-label" for="comment1" >
+                                                Show Most Commented Bar
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="comment"
+                                                id="comment2" checked value=false>
+                                            <label class="form-check-label" for="comment2">
+                                               Disable Most Commented Bar
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Footer Message</h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(custom.footerMessage == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked name="footerMessage" value=true
+                                            id="footerMessage1">
+                                        <label class="form-check-label" for="footerMessage1">
+                                            Show Footer Message
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="footerMessage" value=false
+                                            id="footerMessage2">
+                                        <label class="form-check-label" for="footerMessage2">
+                                           Disable Footer Message
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="footerMessage" value=true
+                                                id="footerMessage1">
+                                            <label class="form-check-label" for="footerMessage1">
+                                                Show Footer Message
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" checked name="footerMessage" value=false
+                                                id="footerMessage2">
+                                            <label class="form-check-label" for="footerMessage2">
+                                               Disable Footer Message
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+        <!-- // Basic multiple Column Form section start -->
+        <section id="multiple-column-form">
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Text Value</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="">Footer Date (Year)</label>
+                                                <input type="number" id="" class="form-control" placeholder="" min="2021" max="2030" name="date" value="<%=custom.date%>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">Site Header</label>
+                                                <input type="text" id="first-name-column" class="form-control" placeholder="Display Name" name="siteH" value="<%=custom.siteH%>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group with-title mb-3">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="footerM" required><%=custom.footerM%></textarea>
+                                                <label>Footer Message</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroupFileAddon01"><i
+                                                    data-feather="upload"></i></span>
+                                            <div class="form-file">
+                                                <input type="file" class="form-file-input" id="inputGroupFile01"
+                                                    aria-describedby="inputGroupFileAddon01" name="image">
+                                                <label class="form-file-label" for="inputGroupFile01">
+                                                    <span class="form-file-text">Home Page Image ...</span>
+                                                    <span class="form-file-button">Browse</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="id" value="<%=custom._id%>">
+                                    <input type="hidden" name="logo" value="<%=custom.logo%>">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>            
+                
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body" style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary justify-content-end">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            </div>
+
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="/users/assets/js/feather-icons/feather.min.js"></script>
+    <script src="/users/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/users/assets/js/app.js"></script>
+
+    <!-- Include Choices JavaScript -->
+    <script src="/users/assets/vendors/choices.js/choices.min.js"></script>
+
+    <script src="/users/assets/js/main.js"></script>
+</body>
+
+</html>

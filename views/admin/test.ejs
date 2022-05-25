@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Sign up</h1>
+
+        <input type="text" id="username" placeholder="username">
+        <input type="text" id="name" id="name" placeholder="name">
+        <input type="text" id="phone" placeholder="phone">
+        <input type="password" id="password">
+        <input type="email" id="email" placeholder="email">
+        <input type="file" id="image">
+        <button onclick="upload()">submit</button>
+    
+</body>
+
+<input id="imageFile" name="imageFile" type="file" class="imageFile"  accept="image/*"   /> 
+<input type="button" value="Resize Image"  onclick="ResizeImage()"/> 
+<img src="" id="preview"  >
+<img src="" id="output">
+<script>
+$(document).ready(function() {
+
+$('#imageFile').change(function(evt) {
+
+        var files = evt.target.files;
+        var file = files[0];
+
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+});
+
+function ResizeImage() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var filesToUploads = document.getElementById('imageFile').files;
+        var file = filesToUploads[0];
+        if (file) {
+
+            var reader = new FileReader();
+            // Set the image once loaded into file reader
+            reader.onload = function(e) {
+
+                var img = document.createElement("img");
+                img.src = e.target.result;
+
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+
+                var MAX_WIDTH = 113;
+                var MAX_HEIGHT = 112;
+                var width = img.width;
+                var height = img.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+
+               var dataurl = canvas.toDataURL(file.type);
+                document.getElementById('output').src = dataurl;
+                console.log(dataurl);
+            }
+            reader.readAsDataURL(file);
+            document.getElementById('test').src = dataurl;
+        }
+
+    } else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
+}
+</script>
+
+<script>
+    const upload = async () =>{
+        var name = await document.getElementById('name').value + "";
+        var username = await document.getElementById('username').value + "";
+        var phone = await document.getElementById('phone').value + "";
+        var password = await document.getElementById('password').value + "";
+        var email = await document.getElementById('email').value + "";
+        // var image = await document.getElementById('image').value;
+
+
+       var post = {
+            email :email,
+            name : name,
+            phone : phone,
+            password : password,
+            username : username,
+            image:image
+       }
+
+       fetch('/users/test',{
+           method:"POST",
+           headers:{
+            "Content-Type" : "application/json"
+           },
+           body:JSON.stringify(post)
+       }).then((res)=>{
+        alert("successful")
+       })
+    // var username = document.getElementById('name').value;
+        // console.log(post);
+    }
+</script>
+</html>

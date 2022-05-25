@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= data.title%></title>
+    <link rel="stylesheet" href="/users/assets/vendors/quill/quill.snow.css">
+
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    <script src="/users/assets/vendors/quill/quill.min.js"></script>
+<script>
+    
+
+
+
+var xy= <%- data.date %>;
+
+var x= <%- data.body %>;
+
+const date = ()=>{
+    const mySentence = "<%- data.title%>";
+
+const finalSentence = mySentence.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+document.getElementById("fgg").innerHTML = finalSentence;
+document.getElementById('date').innerHTML = dayjs(xy).format('MMMM D, YYYY')
+}
+</script>
+</head>
+<body onload="date()">
+ <div class="container">
+    <h1>
+        <%= data.title%>
+    </h1>
+    <h4>
+        <%= author.name%>
+        <%= author.email%>
+
+    </h4>
+
+    <script>
+    </script>
+    <textarea name="" id="" cols="30" rows="10"><%= author.about%></textarea>
+<div id="date"></div>
+<div id="fgg"></div>
+    <br><br>
+    <img src="<%= data.image%>">
+
+
+    <textarea name="" id="" cols="30" rows="10"><%= data.body%></textarea>
+
+    <div id="editor" style="height: 500px">
+    </div>
+
+<p><%= data.tags%></p>
+ </div>   
+</body>
+<script src="/assets/js/form-editor2.js"></script>
+
+
+</html>

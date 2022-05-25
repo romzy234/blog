@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="assets/vendors/choices.js/choices.min.css" />
+
+    <% if(logUser.setting.theme == "white"){%>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <%}else{%> 
+    <link rel="stylesheet" href="assets/css/dark.css">
+    <link rel="stylesheet" href="assets/css/darkBoot.css">
+    <%}%>
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar/settings%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-4 order-md-1 order-last">
+                            <h3>Settings</h3>
+                            <p class="text-subtitle text-muted">Would finish Everything in Version Two.</p>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/users">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+        <form action="/users/settings" method="post">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Email Notification</h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(logUser.setting.emailNotification == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked value=true name="emailNotification"
+                                            id="emailNotification1">
+                                        <label class="form-check-label" for="emailNotification1" >
+                                            Recevie Notification for new Comments
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="emailNotification"
+                                            id="emailNotification2" value=false>
+                                        <label class="form-check-label" for="emailNotification2">
+                                           Disable Notification for new comments
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value=true name="emailNotification"
+                                                id="emailNotification1">
+                                            <label class="form-check-label" for="emailNotification1" >
+                                                Recevie Notification for new Comments
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="emailNotification"
+                                                id="emailNotification2" checked value=false>
+                                            <label class="form-check-label" for="emailNotification2">
+                                               Disable Notification for new comments
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Select Theme For Admin System</h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(logUser.setting.theme == "white"){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked name="theme" value="white"
+                                            id="theme1">
+                                        <label class="form-check-label" for="theme1">
+                                            Light Mode
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="theme" value="dark"
+                                            id="theme2">
+                                        <label class="form-check-label" for="theme2">
+                                           Dark Mode (Expriement Feature)
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="theme" value="white"
+                                                id="theme1">
+                                            <label class="form-check-label" for="theme1">
+                                                Light Mode
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" checked name="theme" value="dark"
+                                                id="theme2">
+                                            <label class="form-check-label" for="theme2">
+                                               Dark Mode (Expriement Feature)
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Show My Detail <b> Author details </b></h4>
+                                </div>
+                                <div class="card-body">
+                                    <% if(logUser.setting.showContact == true){%>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" checked name="showContact" value="true"
+                                            id="showContact1">
+                                        <label class="form-check-label" for="showContact1">
+                                            Show My Detail (default)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="showContact" value="false"
+                                            id="showContact2">
+                                        <label class="form-check-label" for="showContact2">
+                                           Don't Show My Detail 
+                                        </label>
+                                    </div>
+                                    <%}else{%> 
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="showContact" value="true"
+                                                id="showContact1">
+                                            <label class="form-check-label" for="showContact1">
+                                                Show My Detail (default)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" checked name="showContact" value="false"
+                                                id="showContact2">
+                                            <label class="form-check-label" for="showContact2">
+                                               Don't Show My Detail 
+                                            </label>
+                                        </div>
+                                     <%}%>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Empty Recycle Bin</h4>
+                            </div>
+                            <div class="card-body">
+                                <p>
+                                    Delete All Blog From Recycle Bin.
+                                </p>
+                                <!-- Button trigger for basic modal -->
+                                <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
+                                    data-bs-target="#default">
+                                    Empty Recycle Bin
+                                </button>
+
+                                <!--Basic Modal -->
+                                <div class="modal fade text-left" id="default" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="myModalLabel1">Basic Modal</h5>
+                                                <button type="button" class="close rounded-pill"
+                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                    <i data-feather="x"></i>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    Bonbon caramels muffin. Chocolate bar oat cake cookie pastry
+                                                    dragée pastry. Carrot cake
+                                                    chocolate tootsie roll chocolate bar candy canes biscuit.
+
+                                                    Gummies bonbon apple pie fruitcake icing biscuit apple pie
+                                                    jelly-o sweet roll. Toffee sugar
+                                                    plum sugar plum jelly-o jujubes bonbon dessert carrot cake.
+                                                    Cookie dessert tart muffin topping
+                                                    donut icing fruitcake. Sweet roll cotton candy dragée danish
+                                                    Candy canes chocolate bar cookie.
+                                                    Gingerbread apple pie oat cake. Carrot cake fruitcake bear claw.
+                                                    Pastry gummi bears
+                                                    marshmallow jelly-o.
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn" data-bs-dismiss="modal">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Close</span>
+                                                </button>
+                                                <button type="button" class="btn btn-primary ml-1"
+                                                    data-bs-dismiss="modal">
+                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Accept</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body" style="text-align: center;">
+                                    <button type="submit" class="btn btn-primary justify-content-end">Update</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            </div>
+
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <!-- Include Choices JavaScript -->
+    <script src="assets/vendors/choices.js/choices.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

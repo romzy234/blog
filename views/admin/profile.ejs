@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <% if(logUser.setting.theme == "white"){%>
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+        <%}else{%> 
+        <link rel="stylesheet" href="assets/css/dark.css">
+        <link rel="stylesheet" href="assets/css/darkBoot.css">
+        <%}%>
+
+
+    <link rel="stylesheet" href="assets/css/img.css">
+
+    <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <!-- <link rel="stylesheet" href="assets/css/dark.css">
+    <link rel="stylesheet" href="assets/css/darkBoot.css"> -->
+
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <h3>My Profile</h3>
+                    <p class="text-subtitle text-muted">Manage User Profile</p>
+                </div>
+                <section class="section">
+                   <!-- Basic Horizontal form layout section start -->
+    <section id="basic-horizontal-layouts">
+        <div class="row match-height">
+            <div class="col-md-8 col-12">
+            <div class="card">
+                <div class="card-header">
+                <h4 class="card-title">Basic Details</h4>
+                </div>
+                <div class="card-content">
+                <div class="card-body">
+                    <form class="form form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                        <div class="col-md-4">
+                            <label>USERNAME</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="text" id="first-name" class="form-control" name="fname" disabled="" value="<%=logUser.username%>" placeholder="USERNAME">
+                        </div>
+                        <div class="col-md-4">
+                            <label>EMAIL</label>
+                        </div>
+                        <br>
+                        <div class="col-md-8 form-group">
+                            <input type="email" id="email-id" class="form-control" name="email-id" disabled="" value="<%=logUser.email%>" placeholder="EMAIL">
+                        </div>
+                        <div class="col-md-4">
+                            <label>MOBILE</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            <input type="text" id="contact-info" class="form-control" name="contact" disabled="" value="<%=logUser.phone%>" placeholder="MOBILE">
+                        </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-4 col-12">
+            <div class="card">
+                <div class="card-content">
+                <div class="card-body">
+                    <form class="form form-horizontal">
+                    <div class="form-body">
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <div class="form-group">
+                                    <div class="position-relative">
+                                        <img class="rounded-circle img" src="<%=logUser.profilePic%>" alt="200x200" style="width: 180px;height: 180px;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 container" style="text-align: center;">
+                                <button type="button" class="btn btn-outline-primary block"
+                                data-bs-toggle="modal" data-bs-target="#exampleModalCenter" style="font-weight: bolder;">
+                                Edit Profile Picture
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    <!-- // Basic Horizontal form layout section end -->
+        <!-- // Basic multiple Column Form section start -->
+        <section id="multiple-column-form">
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">OTHER DEATILS</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form class="form">
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">Display Name</label>
+                                                <input type="text" id="first-name-column" class="form-control" placeholder="Display Name" name="fname-column" disabled="" value="<%=logUser.name%>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="last-name-column">User Id</label>
+                                                <input type="text" id="last-name-column" class="form-control" placeholder="User Id" disabled="" value="<%=logUser._id%>" name="lname-column">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group with-title mb-3">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"disabled=""><%=logUser.about    %></textarea>
+                                                <label>About Author</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1" style="font-weight: bolder;">
+                                            Edit Details
+                                        </button>                                       
+                                     </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- // Basic multiple Column Form section end -->
+                </section>
+            </div>
+<!-- Image Update Model -->
+            <div>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                            role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Updating Profile Image</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        Note This Image Would Be Shown To The Users Reading the Post <br><span style="color:red;font-weight:bolder"> Mind The Image Size</span>
+                                    </p>
+                                    <form action="/users/update/image" enctype="multipart/form-data" method="post">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroupFileAddon01"><i
+                                                    data-feather="upload"></i></span>
+                                            <div class="form-file">
+                                                <input type="file" class="form-file-input" id="inputGroupFile01"
+                                                    aria-describedby="inputGroupFileAddon01" name="image">
+                                                <label class="form-file-label" for="inputGroupFile01">
+                                                    <span class="form-file-text">Choose file...</span>
+                                                    <span class="form-file-button">Browse</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary"
+                                        data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Cancel</span>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary ml-1">
+                                        <i class="bx bx-check d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Upload</span>
+                                    </button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+<!--End Image Update Model -->
+
+<!-- Users Update Model -->
+<div>
+    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Updating Profile Image</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                            <i data-feather="x"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Edit Your Profile
+                        </p>
+                        <form action="/users/update/profile" method="post">
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="first-name-column">Display Name</label>
+                                        <input type="text" id="first-name-column" class="form-control" placeholder="Display Name" required="" value="<%=logUser.name%>" name="name" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="last-name-column">Email</label>
+                                        <input type="text" id="last-name-column" class="form-control" placeholder="Email" required="" value="<%=logUser.email%>" name="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-12">
+                                    <div class="form-group with-title mb-3">
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="about"><%=logUser.about%></textarea>
+                                        <label>About Author</label>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-secondary"
+                            data-bs-dismiss="modal">
+                            <i class="bx bx-x d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Cancel</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary ml-1">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Send</span>
+                        </button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+</div>
+<!--End Users Update Model -->
+
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

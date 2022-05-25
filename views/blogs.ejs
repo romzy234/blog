@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Remove A blog</title>
+
+        <link rel="stylesheet" href="/users/assets/css/bootstrap.css">
+        <link rel="stylesheet" href="/users/assets/css/app.css">
+
+    <link rel="stylesheet" href="/users/assets/vendors/simple-datatables/style.css">
+
+    <link rel="stylesheet" href="/users/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="shortcut icon" href="/users/assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+
+            <!-- end sidebar -->
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>All Post</h3>
+                            <p class="text-subtitle text-muted">All Post Created, Saved As Draft Or Published. To create A Post Go <a
+                                    href="/users/create">here</a>.</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/users/">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Posts</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <% if(data){ %>
+                    <div class="card">
+                        <div class="card-header">
+                            Sort By Last Added
+                        </div>
+                        <div class="card-body">
+                            <table class='table table-striped' id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Title</th>
+                                        <th>Preview</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Operation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% var num = 1%>
+                                    <%data.forEach((value)=>{%>
+                                      <% var d = new Date(value.date)%>
+                                    <tr>
+                                        <td><%=  num%></td>
+                                        <td><%= value.title%></td>
+                                        <td>
+                                            <% if(value.title.length < 70){ %>
+                                                <%= value.preview.substr(0,60)%> ...
+                                            <% } else {%>  
+                                                <%= value.preview%>
+                                            <%}%></td>
+                                        <td><%= d%></td>
+                                        <td>
+                                            <% if(value.publish == "Published"){ %>
+                                                <span class="badge bg-success"><%= value.publish%></span>
+                                            <% } else if(value.publish == "Draft"){ %>  
+                                                <span class="badge bg-warning"> Draft</span>
+                                            <%} else {%>
+                                                <span class="badge bg-danger"> Bin</span>
+                                                <% } %>
+                                        </td>
+                                        <td>
+                                            <button class="btn icon btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#danger<%= value._id%>"><i data-feather="tool"></i></button>
+                                        </td>
+                                    </tr>
+                                                        <!--Danger theme Modal -->
+                                <div class="modal fade text-left" id="danger<%= value._id%>" tabindex="-1"
+                                role="dialog" aria-labelledby="myModalLabel120"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                    role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger">
+                                            <h5 class="modal-title white" id="myModalLabel120">
+                                                Warning</h5>
+                                            <button type="button" class="close"
+                                                data-bs-dismiss="modal" aria-label="Close">
+                                                <i data-feather="x"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            You Are About to delete <b><%= value.title%></b> !<br>
+                                            Are You Sure About This ?
+
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"
+                                                class="btn btn-light-secondary"
+                                                data-bs-dismiss="modal">
+                                                <i class="bx bx-x d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Nope My Bad</span>
+                                            </button>
+                                            <% if(value.publish !== "Unpublished"){ %>
+                                            <a class="btn btn-warning ml-1" href="/story/<%= value._id%>">
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Unpublish</span>
+                                            </a>
+                                            <%} else {%>
+
+                                            <a class="btn btn-primary ml-1" href="/story/<%= value._id%>">
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Restore Post</span>
+                                            </a>  
+                                              
+                                            <% } %>
+
+                                            <a class="btn btn-danger ml-1" href="/story/<%= value._id%>">
+                                                <i class="bx bx-check d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Sure Delete</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            <!-- End model -->
+                                    <%num +=1%>
+                                    <%});%> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% } else{ %>  
+                        <div class="card">                           
+                            <div class="block">
+                              <div class="card-header"><strong>You Have No Record Or Post Yet </strong></div>
+                              <div class="card-body">
+                                <form class="form-inline">
+                                  <div class="form-group">
+                                    <a href="/users/create" class="btn btn-primary">Create A New Blog  </a>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                       <% } %>
+                </section>
+            </div>
+
+            <footer>
+        
+            </footer>
+        </div>
+    </div>
+    <script src="/users/assets/js/feather-icons/feather.min.js"></script>
+    <script src="/users/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/users/assets/js/app.js"></script>
+
+    <script src="/users/assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="/users/assets/js/vendors.js"></script>
+
+    <script src="/users/assets/js/main.js"></script>
+</body>
+
+</html>

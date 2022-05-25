@@ -1,0 +1,119 @@
+<style>
+    #editor {
+      height: 300px;
+    }
+    
+    </style>
+        <link rel="stylesheet" href="assets/vendors/choices.js/choices.min.css" />
+    
+    <!-- Include Quill stylesheet -->
+    <link rel="stylesheet" href="assets/vendors/quill/quill.snow.css">    
+    
+     <form action = '/users/blog' enctype="multipart/form-data" method = 'POST'>
+      <!-- Create the editor container -->
+      <input type = 'text' name = 'title' placeholder = 'title'>
+      <input type="file" class="form-control-file" name="image" multiple> 
+      <label for="body">About me</label>
+      <div class="col-md-6 mb-4">
+        <h6>Multiple Select with Remove Button</h6>
+        <p>Use <code>.multiple-remove</code> attribute for multiple select box
+            with remove button.</p>
+        <div class="form-group">
+            <select class="choices form-select multiple-remove"
+                multiple="multiple" id="example2">
+                <optgroup label="Figures">
+                    <option value="romboid">Romboid</option>
+                    <option value="trapeze" selected>Trapeze</option>
+                    <option value="triangle">Triangle</option>
+                    <option value="polygon">Polygon</option>
+                </optgroup>
+                <optgroup label="Colors">
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue" selected>Blue</option>
+                    <option value="purple">Purple</option>
+                </optgroup>
+            </select>
+        </div>
+    </div>
+      <input name="body" type="hidden">
+      <input name="tag" type="hidden">
+      <div id="editor">
+         <p>I am at my wit's end. Stackoverflow is my last hope</p>
+      </div>
+        <button type="submit" >Submit</button>
+    
+     </form>
+    
+    
+    <!-- Include the Quill library -->
+    <script src="assets/vendors/quill/quill.min.js"></script>
+    
+    <script src="/users/assets/vendors/choices.js/choices.min.js"></script>
+    <!-- Initialize Quill editor -->
+    <script>
+    const element = document.getElementById('example2');
+    const example = new Choices(element);
+    var tags = [];
+    console.log('hey cyril');
+   
+   
+    element.addEventListener(
+      'addItem',
+      function(event) {
+        // do something creative here...
+
+        tags.push(event.detail.value)
+
+        console.log(tags);
+        // console.log(event.detail.id);
+        // console.log(event.detail.value);
+        // console.log(event.detail.label);
+        // console.log(event.detail.customProperties);
+        // console.log(event.detail.groupValue);
+      },
+      false,
+    );
+
+      var editor = new Quill('#editor', {
+        modules: { toolbar: [
+            [{ font: [] }, { size: [] }], 
+            ["bold", "italic", "underline", "strike"], 
+            [
+                { color: [] }, 
+                { background: [] }
+            ],["link", "image"]]},
+        theme: 'snow'
+      });
+    
+      var form = document.querySelector('form');
+      form.onsubmit = function() {
+        // Populate hidden form on submit
+        var body = document.querySelector('input[name=body]');
+        body.value = JSON.stringify(editor.getContents());
+        var tag = document.querySelector('input[name=tag]');
+
+        tag.value = tags;
+      };
+    
+    </script> 
+
+    <!-- <script>
+      var editor = new Quill('#editor', {
+          modules: { toolbar: "#toolbar" },
+          theme: 'snow'
+      });
+    
+     var form = document.querySelector('form');
+      function formatField(){
+        var editor = document.querySelector(".ql-editor").contentEditable = false;
+        var clipboard = document.querySelector(".ql-clipboard").contentEditable = false;
+        var bar = document.querySelector("input[type=text]").type="hidden"
+        var p = document.querySelector("#editor");
+        var myInput = document.querySelector("input[name=about]");
+        myInput.value = p.innerHTML;
+      }
+    
+    
+    </script>  -->
+

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <% if(logUser.setting.theme == "white"){%>
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+        <%}else{%> 
+        <link rel="stylesheet" href="assets/css/dark.css">
+        <link rel="stylesheet" href="assets/css/darkBoot.css">
+        <%}%>
+
+    <link rel="stylesheet" href="assets/vendors/chartjs/Chart.min.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <!-- <link rel="stylesheet" href="assets/css/dark.css">
+    <link rel="stylesheet" href="assets/css/darkBoot.css"> -->
+
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <h3>Dashboard</h3>
+                    <p class="text-subtitle text-muted">Display of your statistics</p>
+                </div>
+                <section class="section">
+                    <div class="row mb-2">
+                        <div class="col-12 col-md-3">
+                            <div class="card card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3 d-flex justify-content-between'>
+                                            <h3 class='card-title'>Total Vistor</h3>
+                                            <div class="card-right d-flex align-items-center">
+                                                <p><b>24</b> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="card card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3 d-flex justify-content-between'>
+                                            <h3 class='card-title'>Total Post</h3>
+                                            <div class="card-right d-flex align-items-center">
+                                                <p> <b>5</b> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="card card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3 d-flex justify-content-between'>
+                                            <h3 class='card-title'>Total Draft</h3>
+                                            <div class="card-right d-flex align-items-center">
+                                                <p> <b>4</b> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="card card-statistic">
+                                <div class="card-body p-0">
+                                    <div class="d-flex flex-column">
+                                        <div class='px-3 py-3 d-flex justify-content-between'>
+                                            <h3 class='card-title'>Total Admin</h3>
+                                            <div class="card-right d-flex align-items-center">
+                                                <p><b>5</b></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div>
+                       <div class="col-md-9">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class='card-heading p-1 pl-3'>Post Status</h3>
+                                <p>show statistics for last 7 post</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 col-12">
+                                        <div class="pl-3">
+                                            <h1 class='mt-5'>Number Of Total Post: <span style="color: #4bc0c0;font-weight: bold;">12</span></h1>
+                                            <p class='text-xs'><span class="text-green"><i data-feather="bar-chart"
+                                                        width="15"></i> +19%</span> than last post</p>
+                                            <div class="legends">
+                                                <div class="legend d-flex flex-row align-items-center">
+                                                    <div class='w-3 h-3 rounded-full bg-info me-2'></div><span
+                                                        class='text-xs'>Last Post</span>
+                                                </div>
+                                                <div class="legend d-flex flex-row align-items-center">
+                                                    <div class='w-3 h-3 rounded-full bg-blue me-2'></div><span
+                                                        class='text-xs'>Current Highest</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-12">
+                                        <canvas id="bar"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       </div>
+                   </div>
+                   <div class="row mb-3">
+                    <div class="card widget-todo">
+                        <div
+                            class="card-header border-bottom d-flex justify-content-between align-items-center">
+                            <h4 class="card-title d-flex">
+                                <i class='bx bx-check font-medium-5 pl-25 pr-75'></i>Author Post
+                            </h4>
+
+                        </div>
+                    <div class="card-body px-0 py-1">
+                        <table class='table table-borderless'>
+                            <tr>
+                                <td class='col-3'>UI Design</td>
+                                <td class='col-6'>
+                                    <div class="progress progress-info">
+                                        <div class="progress-bar" role="progressbar" style="width: 60%"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td class='col-3 text-center'>60%</td>
+                            </tr>
+                            <tr>
+                                <td class='col-3'>VueJS</td>
+                                <td class='col-6'>
+                                    <div class="progress progress-success">
+                                        <div class="progress-bar" role="progressbar" style="width: 35%"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td class='col-3 text-center'>30%</td>
+                            </tr>
+                            <tr>
+                                <td class='col-3'>Laravel</td>
+                                <td class='col-6'>
+                                    <div class="progress progress-danger">
+                                        <div class="progress-bar" role="progressbar" style="width: 50%"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td class='col-3 text-center'>50%</td>
+                            </tr>
+                            <tr>
+                                <td class='col-3'>ReactJS</td>
+                                <td class='col-6'>
+                                    <div class="progress progress-primary">
+                                        <div class="progress-bar" role="progressbar" style="width: 80%"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td class='col-3 text-center'>80%</td>
+                            </tr>
+                            <tr>
+                                <td class='col-3'>Go</td>
+                                <td class='col-6'>
+                                    <div class="progress progress-secondary">
+                                        <div class="progress-bar" role="progressbar" style="width: 65%"
+                                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td class='col-3 text-center'>65%</td>
+                            </tr>
+                        </table>
+                    </div></div>
+                </section>
+            </div>
+        </div>
+            </div>
+
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script src="assets/vendors/chartjs/Chart.min.js"></script>
+    <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/js/pages/dashboard.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Tags</title>
+
+    <% if(logUser.setting.theme == "white"){%>
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+        <%}else{%> 
+        <link rel="stylesheet" href="assets/css/dark.css">
+        <link rel="stylesheet" href="assets/css/darkBoot.css">
+        <%}%>
+
+
+    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Active Tags</h3>
+                            <p class="text-subtitle text-muted">Tags Are Used To Sort And Group Various Post Togther</p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Tags</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                        <!-- // Basic multiple Column Form section start -->
+        <section id="multiple-column-form">
+            <div class="row match-height">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Create A New Tag</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form class="form" method="POST" action="/users/tags">
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="first-name-column">Tag Name / Topic</label>
+                                                <input type="text" id="first-name-column" class="form-control" placeholder="Sale" required="" name="tag">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="last-name-column">Group</label>
+                                                <input type="text" id="last-name-column" class="form-control" placeholder="Really Dont Know What I Had In Mind For This 😅 "  required="" name="group">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-12">
+                                            <div class="form-group with-title mb-3">
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="This Post Contain Information Containing Sale And Disturbing of goods and service " required="" name="detail"></textarea>
+                                                <label>Details About The Tag</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-outline-primary block" style="font-weight: bolder;">
+                                            Create Tags
+                                        </button>                                       
+                                     </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- // Basic multiple Column Form section end -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                           Active Tags 
+                        </div>
+                        <div class="card-body">
+                            <table class='table table-striped' id="table1">
+                                <thead id="table">
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Name</th>
+                                        <th>Tag Details</th>
+                                        <th>Group</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% var num = 1%>
+                                    <%data.forEach((value)=>{%>
+                                      <% var d = new Date(value.date)%>
+                                    <tr>
+                                        <td><%=num%></td>
+                                        <td><%= value.tag.toUpperCase()%></td>
+                                        <td><%= value.detail%></td>
+                                        <td><%= value.group%></td>
+                                        <td>
+                                            <span class="badge bg-danger"><a href="/users/tags/delete/<%= value._id%>">Delete Tag</a></span>
+                                        </td>
+                                    </tr>
+                                    <%num +=1%>
+                                    <%});%> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/js/vendors.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

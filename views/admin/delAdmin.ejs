@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Admin</title>
+
+    <% if(logUser.setting.theme == "white"){%>
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+        <%}else{%> 
+        <link rel="stylesheet" href="assets/css/dark.css">
+        <link rel="stylesheet" href="assets/css/darkBoot.css">
+        <%}%>
+
+    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+<!-- sidebar -->
+
+<% include ./partial/sidebar/sidebarDelUsers%>
+
+<!-- end sidebar -->
+        <div id="main">
+            <!-- sidebar -->
+
+            <% include ./partial/navbar%>
+
+            <!-- end sidebar -->
+
+            <div class="main-content container-fluid">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Admin Datatable</h3>
+                            <p class="text-subtitle text-muted">Remove Admin From System </p>
+                        </div>
+                        <div class="col-12 col-md-6 order-md-2 order-first">
+                            <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/user/">Dashboard</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Admins</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            This Whole system Would be updated in V2
+                        </div>
+                        <div class="card-body">
+                            <table class='table table-striped' id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Display Name</th>
+                                        <th>Status</th>
+                                        <th>Disable</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% var num = 1%>
+                                    <%data.forEach((value)=>{%>
+                                      <% var d = new Date(value.date)%>
+                                    <tr>
+                                        <td><%=  num%></td>
+                                        <td><%= value.username.toUpperCase()%></td>
+                                        <td><%= value.email%></td>
+                                        <td><%= value.name%></td>
+                                        <% if(value.status){ %>
+                                        <td>                          
+                                            <div class="avatar bg-primary me-3">
+                                            <span class="avatar-content" style="font-weight: bolder;"><%= value.username.toUpperCase().substr(0,1)%></span>
+                                            <span class="avatar-status bg-success"></span>
+                                        </div></td>
+                                        <% } else {%>  
+                                            <td>                          
+                                                <div class="avatar bg-primary me-3">
+                                                <span class="avatar-content" style="font-weight: bolder;"><%= value.username.toUpperCase().substr(0,1)%></span>
+                                                <span class="avatar-status bg-danger"></span></div></td>
+                                        <% } %>
+                                        <% if(value.superAdmin){ %>
+                                        <td>
+                                            <button class="btn btn-dark">Disable </button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-dark">Delete</button>
+                                        </td>
+                                        <%} else {%>
+                                        <td>
+                                            <% if(!value.status){ %>
+                                            <a class="btn btn-info" href="/users/users/status/<%= value._id%>/<%= value.status%>">Enable</a>
+                                            <%} else {%>
+                                            <a class="btn btn-warning" href="/users/users/status/<%= value._id%>/<%= value.status%>">Disable</a>
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <div class="modal-danger me-1 mb-1 d-inline-block">
+                                                <!-- Button trigger for danger theme modal -->
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-toggle="modal" data-bs-target="#danger<%= value._id%>">
+                                                    DELETE
+                                                </button>
+
+                                                <!--Danger theme Modal -->
+                                                <div class="modal fade text-left" id="danger<%= value._id%>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="myModalLabel120"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                        role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-danger">
+                                                                <h5 class="modal-title white" id="myModalLabel120">
+                                                                    Hope You Know What You Are Doing</h5>
+                                                                <button type="button" class="close"
+                                                                    data-bs-dismiss="modal" aria-label="Close">
+                                                                    <i data-feather="x"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                You are about to delete an admin <br>
+                                                                Disabling an account would be better <br>
+                                                                As all user posts and histroy are loss When Deleted
+                                                                <br><br>
+                                                                Are You Sure You Want To Delete <b><%= value.name%></b>
+
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                    class="btn btn-light-secondary"
+                                                                    data-bs-dismiss="modal">
+                                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Close</span>
+                                                                </button>
+                                                                <a type="button" href="/users/users/delete/<%= value._id%>/" class="btn btn-danger ml-1">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Delete</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <% } %>
+                                    </tr>
+                                    <%num +=1%>
+                                    <%});%> 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+            <footer>
+                <% include ./partial/footer%>
+            </footer>
+        </div>
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/js/vendors.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

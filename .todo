@@ -1,0 +1,98 @@
+in the admin login remember to set the welcome message to <%= sitename%> 
+
+and create a configure for the other values 
+
+footer also  rename the footers
+
+recycle bin for blogs 
+
+/// Stop 
+
+file  choich.min.js
+test2.ejs
+create
+form-editor
+
+muitple input
+
+// working with multer for the post image and .... otheer things ...like ????
+
+Done //
+
+// 
+
+fix user config for site setting 
+
+// What to do ..............................
+
+sudo apt-get install -y mongodb-org=4.4 mongodb-org-database=4.4 mongodb-org-server=4.4 mongodb-org-shell=4.4 mongodb-org-mongos=4.4 mongodb-org-tools=4.4
+
+Done //
+
+/// New Tasks 
+
+finish admin dashboasd 
+
+look for client side template 
+
+seo 
+ 
+ and deployment testing 
+
+ /// New TAsk 
+
+ changing the link for edit to posts  nav Bar ✅✅
+
+ Done ///
+
+ /// New TAsk
+
+once created check if admin is avaliable ________ if  not avaliable create if avaliable ignore 
+defualt password is admin ✅
+
+then make admin undelete able ✅
+Done //
+ 
+/// New TAsk 
+
+1. change password ✅
+2. edit profile ✅
+3. delete user ✅
+4. disable user ✅
+5. delete post ✅
+6. settings ✅
+
+
+/// New Tasks
+clone home page 
+
+///
+Do not sign up repeated username 
+
+is unique 
+Done ///
+
+/// New TAsk 
+
+Create middleware so other admin cant delete post ✅
+edit post ✅
+and post edidt post ✅
+
+    <%if(data.tags.includes(value.tag.toUpperCase())){%>   
+        <option selected value="<%= value.tag.toUpperCase()%>"><%= value.tag.toUpperCase()%></option>
+        <%} else {%> 
+            <option value="<%= value.tag.toUpperCase()%>"><%= value.tag.toUpperCase()%></option>    
+            <%}%>
+Done////////
+
+
+////New Task 
+
+Comments System 
+And .... tags?? 
+
+View systems 
+
+
+/// Nav BAr 
+// home page ...
