@@ -16,7 +16,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-var db = config.local // change data 
+var db = config.cloud // change data 
 // mongodb connector 
 mongoose.connect(db, {
   useNewUrlParser: true,useUnifiedTopology:true
